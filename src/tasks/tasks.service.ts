@@ -3,28 +3,20 @@ import { TaskModel, TaskStatus } from './task.model';
 
 @Injectable()
 export class TasksService {
-  private tasks: TaskModel[] = [
-    {
-      id: '1',
-      title: 'Task 1',
-      description: 'Task 1 description',
-      status: TaskStatus.OPEN,
-    },
-    {
-      id: '2',
-      title: 'Task 2',
-      description: 'Task 2 description',
-      status: TaskStatus.IN_PROGRESS,
-    },
-    {
-      id: '3',
-      title: 'Task 3',
-      description: 'Task 3 description',
-      status: TaskStatus.DONE,
-    },
-  ];
+  private tasks: TaskModel[] = [];
 
   getAllTasks(): TaskModel[] {
     return this.tasks;
+  }
+
+  createTask(title: string, description: string): TaskModel {
+    const task: TaskModel = {
+      id: crypto.randomUUID(),
+      title,
+      description,
+      status: TaskStatus.OPEN,
+    };
+    this.tasks.push(task);
+    return task;
   }
 }
