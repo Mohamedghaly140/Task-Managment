@@ -7,7 +7,7 @@ export class TasksController {
 
   @Get()
   @Version('1')
-  getAllTasks() {
+  getAllTasks(): ReturnType<typeof this.tasksService.getAllTasks> {
     return this.tasksService.getAllTasks();
   }
 }
