@@ -10,6 +10,22 @@ export class TasksService {
     return this.tasks;
   }
 
+  getTaskById(id: string): TaskModel {
+    return this.tasks.find((task) => task.id === id);
+  }
+
+  deleteTaskById(id: string): void {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  updateTaskStatusById(id: string, status: TaskStatus): TaskModel {
+    const task = this.tasks.find((task) => task.id === id);
+    const index = this.tasks.findIndex((task) => task.id === id);
+    task.status = status;
+    this.tasks[index].status = status;
+    return task;
+  }
+
   createTask(createTaskDto: CreateTaskDto): TaskModel {
     const { title, description } = createTaskDto;
 
