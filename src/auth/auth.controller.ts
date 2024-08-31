@@ -12,4 +12,11 @@ export class AuthController {
   ): ReturnType<typeof this.authService.signup> {
     return this.authService.signup(authCredentialsDto);
   }
+
+  @Post('/login')
+  async login(
+    @Body() authCredentialsDto: AuthCredentialsDto,
+  ): ReturnType<typeof this.authService.login> {
+    return this.authService.login(authCredentialsDto);
+  }
 }
