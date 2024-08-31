@@ -20,11 +20,8 @@ export class TasksController {
   @Get()
   getTasks(
     @Query() filterDto: GetTasksFilterDto,
-  ): ReturnType<typeof this.tasksService.getAllTasks> {
-    if (Object.keys(filterDto).length) {
-      return this.tasksService.getTasksWithFilters(filterDto);
-    }
-    return this.tasksService.getAllTasks();
+  ): ReturnType<typeof this.tasksService.getTasks> {
+    return this.tasksService.getTasks(filterDto);
   }
 
   @Get('/:id')
