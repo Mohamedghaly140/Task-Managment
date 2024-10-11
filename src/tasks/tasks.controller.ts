@@ -14,6 +14,8 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filters.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.dectorator';
+import { UserEntity } from 'src/auth/user.entity';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -37,8 +39,9 @@ export class TasksController {
   @Post()
   createTask(
     @Body() createTaskDto: CreateTaskDto,
+    @GetUser() user: UserEntity,
   ): ReturnType<typeof this.tasksService.createTask> {
-    return this.tasksService.createTask(createTaskDto);
+    return this.tasksService.createTask(createTaskDto, user);
   }
 
   @Delete('/:id')
